@@ -37,15 +37,22 @@ The server is bound to a specific IP address and port using the `bind` method. I
 
 ## 5. Code Explanation
 
-The provided Python code does the following:
+The provided Python code implements a basic TCP/IP server using the JTT808-2013 protocol. Here's an overview of its functionalities:
 
-- Initializes a TCP/IP socket.
-- Binds the socket to a specific IP address and port.
-- Listens for incoming connections.
-- Accepts connections, receives data, and processes it using the `general_Data` function.
-- Sends back a response to the client.
+- Initializes a TCP/IP socket using the `socket` module.
+- Binds the socket to a specific IP address (`192.168.0.5`) and port (`8080`).
+- Listens for incoming connections with a maximum backlog of 5.
+- Accepts incoming connections, receives data, and processes it using the `responseData` function.
+- Generates and sends back a response to the client.
 
-The JTT808-2013 protocol functions (`process_data` and `general_Data`) create a response based on the received data. The server continuously listens for incoming data, processes it, and responds to the client.
+The JTT808-2013 protocol-specific functions (`responseData`, `checkCode`, `completeMessage`, `responseHeader`, `extractTerminalNumber`, `registrationBody`, `generalBody`) are responsible for processing the received data and constructing an appropriate response based on the protocol specifications. Noteworthy points include:
+
+- The script uses a fixed buffer size of 1024 bytes for receiving data.
+- Error checking is implemented through a simple XOR-based checksum (`checkCode` function).
+
+The server runs in an infinite loop, continuously listening for incoming connections. Upon receiving data from a client, it processes the data and sends back a response. It's important to adapt the script to match specific use cases and protocol requirements. Additionally, consider implementing robust error handling and security measures.
+
+Make sure to review and customize the code according to your project's needs.
 
 ## 6. Running the Code
 
